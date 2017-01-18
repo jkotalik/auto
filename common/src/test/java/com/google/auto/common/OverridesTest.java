@@ -253,6 +253,14 @@ public class OverridesTest {
     }
   }
 
+  static class TypesForPrivate {
+    static class PrivateParent {
+      private void stat(List x) {}
+    }
+    static class PrivateChild extends PrivateParent {
+      private void stat(List x) {}
+    }
+  }
   @Test
   public void overridesInheritance() {
     checkOverridesInContainedClasses(TypesForInheritance.class);
@@ -276,6 +284,10 @@ public class OverridesTest {
   @Test
   public void overridesRaw() {
     checkOverridesInContainedClasses(TypesForRaw.class);
+  }
+  @Test
+  public void doesntOverridePrivate() {
+    checkOverridesInContainedClasses(TypesForPrivate.class);
   }
 
   // Test a tricky diamond inheritance hierarchy:
